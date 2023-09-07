@@ -1,0 +1,39 @@
+
+//Create Base Sphere
+polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 3 0;
+
+//Create middle sphere
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+polySphere -e -radius 2;
+move -relative -objectSpace -worldSpaceDistance 0 7 0;
+
+//Create Head Sphere
+polySphere -r 1.2 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r -objectSpace -worldSpaceDistance 0 9.5 0 ;
+
+//Create Snowman Nose
+polyCone -r 1 -h 2 -sx 20 -sy 1 -sz 0 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 9.57 0;
+move -r 0 0 1.505688 ;
+scale -r 1 1 0.5 ;
+scale -r 0.5 1 1 ;
+scale -r 0.5 1 1 ;
+scale -r 1 1 0.5 ;
+setAttr "pCone1.rotateX" 90;
+
+//Create Snowman Left Eye
+polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0.368 10.0467 0.999;
+setAttr "pSphere4.rotateX" -9.336;
+setAttr "pSphere4.rotateY" -4.156;
+setAttr "pSphere4.rotateZ" 2.245;
+scale -r 0.25 0.25 0.125 ;
+
+//Create Snowman Right Eye
+polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance -0.368 10.0467 0.999;
+setAttr "pSphere4.rotateX" -9.336;
+setAttr "pSphere4.rotateY" -4.156;
+setAttr "pSphere4.rotateZ" 2.245;
+scale -r 0.25 0.25 0.125 ;
