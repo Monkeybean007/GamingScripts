@@ -37,3 +37,119 @@ setAttr "pSphere4.rotateX" -9.336;
 setAttr "pSphere4.rotateY" -4.156;
 setAttr "pSphere4.rotateZ" 2.245;
 scale -r 0.25 0.25 0.125 ;
+
+//TopHat Rim
+polyDisc -sides 3 -subdivisionMode 4 -subdivisions 3 -radius 1;
+move -r 0 10.860997 0 ;
+move -r 0 -0.148898 0 ;
+move -r 0 -0.161011 0 ;
+scale -r 1 1 1 ;
+scale -r 1 1 1 ;
+scale -r 1.083662 1 1 ;
+scale -r 1 1 1.112812 ;
+move -r 0 -0.0824967 0 ;
+scale -r 1.06006 1 1 ;
+scale -r 1 1 1.05694 ;
+scale -r 1 1.625918 1 ;
+
+//TopHat Top
+polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -r 0 11.318937 0 ;
+scale -r 0.767892 1 1 ;
+scale -r 1 0.72719 1 ;
+move -r 0 -0.116938 0 ;
+scale -r 1 1 0.924494 ;
+
+//Create arms
+//Right arm
+polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance -2.851 6.169 0;
+setAttr "pCylinder2.rotateX" 1.109;
+setAttr "pCylinder2.rotateY" 10.55;
+setAttr "pCylinder2.rotateZ" -57.487;
+scale -r 0.263 2.158 0.232 ;
+//Left Arm
+polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 2.851 6.169 0;
+setAttr "pCylinder3.rotateX" -1.109;
+setAttr "pCylinder3.rotateY" -10.55;
+setAttr "pCylinder3.rotateZ" 57.487;
+scale -r 0.263 2.158 0.232 ;
+
+//Makes the two Ski Poles
+// Create the ski pole handles (grips)
+polyCylinder -r 0.1 -h 1.5 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 4.745 5.468 0;
+// Create the ski pole shafts
+polyCylinder -r 0.05 -h 10 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 4.739 2.2 -0.008;
+scale -r 1 0.753 1;
+// Create ski pole baskets (the wider part at the bottom)
+polyCylinder -r 0.15 -h 0.5 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 4.734 -1.543 0.008;
+// Rotate the ski pole components to align correctly
+rotate -r -os 0 0 180 pCylinder4 pCylinder5 pCylinder6;
+// Create the ski pole handles (grips)
+polyCylinder -r 0.1 -h 1.5 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance -4.745 5.468 0;
+// Create the ski pole shafts
+polyCylinder -r 0.05 -h 10 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance -4.739 2.2 0.008;
+scale -r 1 0.753 1;
+// Create ski pole baskets (the wider part at the bottom)
+polyCylinder -r 0.15 -h 0.5 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance -4.734 -1.543 -0.008;
+// Rotate the ski pole components to align correctly
+rotate -r -os 0 0 180 pCylinder7 pCylinder8 pCylinder9;
+
+
+// Create the base of the skis
+polyCube -w 2 -h 0.2 -d 15 -sx 1 -sy 1 -sz 1;
+// Move the skis to the desired position
+move -r -os 0 0.1 0;
+//Rename the skis
+rename "pCube1" "Skis";
+// Adjust the rotation and position if needed
+rotate -r -os 0 0 0;
+move -r -os 0 0 0;
+
+// Create smile buttons
+// Button 1
+polySphere -r 0.2 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance -0.638 9.24 0.856;
+
+// Button 2
+polySphere -r 0.2 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance -0.3 9.12 0.982;
+
+// Button 3
+polySphere -r 0.2 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0.035 8.991 0.971;
+
+// Button 4
+polySphere -r 0.2 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0.367 9.167 1.001;
+
+// Button 5
+polySphere -r 0.2 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0.7 9.3 0.855;
+
+// Create six pieces of coal
+polySphere -r 0.1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 8.155 1.567;
+
+polySphere -r 0.1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 8.0 1.663;
+
+polySphere -r 0.1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 7.831 1.757;
+
+polySphere -r 0.1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 7.646 1.841;
+
+polySphere -r 0.1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 7.445 1.906;
+
+polySphere -r 0.1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 7.213 1.957;
+
