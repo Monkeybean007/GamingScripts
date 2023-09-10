@@ -1,0 +1,52 @@
+// Create the tree trunk
+polyCylinder -r 0.2 -h 1 -sx 6 -sy 1 -sz 1;
+move 0 0.893 0;
+scale 1.638 1.638 1.638;
+
+// Create Bottom Section of Tree
+polyCone -r 1 -h 2 -sx 20 -sy 1 -sz 0 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -objectSpace -worldSpaceDistance 0 2.942 0;
+scale -r 2.294 2.294 2.294;
+
+
+// Create Middle Section of tree
+polyCone -r 1 -h 2 -sx 20 -sy 1 -sz 0 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+scale -r 2.056 2.056 2.056;
+move -relative -objectSpace -worldSpaceDistance 0 4.011 0;
+
+
+// Create Top Section of tree
+polyCone -r 1 -h 2 -sx 20 -sy 1 -sz 0 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+scale -r 1.402 1.402 1.402;
+move -relative -objectSpace -worldSpaceDistance 0 5.14 0;
+
+// Function to create random snowflakes
+proc string createRandomSnowflakes(float $x, float $y, float $z) {
+    string $snowflake[] = `polyPlane -w 0.1 -h 0.1`;
+    string $snowflakeName = $snowflake[0]; // Get the name from the array
+    move $x $y $z;
+    return $snowflakeName;
+}
+
+// Specify the number of snowflakes you want
+int $numSnowflakes = 50; // Adjust as needed
+
+// Array of section names
+string $sectionNames[] = {"pCone1", "pCone2", "pCone3"};
+
+// Create random snowflakes
+for ($i = 0; $i < $numSnowflakes; $i++) {
+    float $x = rand(-5, 5); // Adjust the range as needed
+    float $y = rand(0, 10); // Adjust the range as needed
+    float $z = rand(-5, 5); // Adjust the range as needed
+    
+    // Create a random snowflake and get its name
+    string $snowflake = createRandomSnowflakes($x, $y, $z);
+    
+    // Select a random index from the section names array
+    int $randomIndex = rand(0, size($sectionNames) - 1);
+    string $randomSection = $sectionNames[$randomIndex];
+    
+    // Parent the snowflake to the randomly selected tree section
+    parent $snowflake $randomSection;
+}
