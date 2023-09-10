@@ -67,9 +67,4 @@ for ($i = 0; $i < $numPresents; $i++) {
     float $x = rand(-3, 3); // Adjust the range as needed
     float $y = rand(0.767); // Adjust the range as needed
     float $z = rand(-3, 3); // Adjust the range as needed
-    
-    // Create a present (gift box) and get its name
-    string $present = createPresent($x, $y, $z);
-    
-    // You can add customizations to the present's appearance here if needed.
 }
