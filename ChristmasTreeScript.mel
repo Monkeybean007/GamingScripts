@@ -50,3 +50,26 @@ for ($i = 0; $i < $numSnowflakes; $i++) {
     // Parent the snowflake to the randomly selected tree section
     parent $snowflake $randomSection;
 }
+
+// Function to create a present (gift box)
+proc string createPresent(float $x, float $y, float $z) {
+    string $present[] = `polyCube -w 1.5 -h 1.5 -d 1.5`; // Adjust size as needed
+    string $presentName = $present[0]; // Get the name from the array
+    move $x $y $z;
+    return $presentName;
+}
+
+// Specify the number of presents you want
+int $numPresents = 5; // Adjust as needed
+
+// Create presents at random positions
+for ($i = 0; $i < $numPresents; $i++) {
+    float $x = rand(-3, 3); // Adjust the range as needed
+    float $y = rand(0.767); // Adjust the range as needed
+    float $z = rand(-3, 3); // Adjust the range as needed
+    
+    // Create a present (gift box) and get its name
+    string $present = createPresent($x, $y, $z);
+    
+    // You can add customizations to the present's appearance here if needed.
+}
