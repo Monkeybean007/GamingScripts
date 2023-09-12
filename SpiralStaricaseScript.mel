@@ -1,0 +1,44 @@
+
+// Define parameters for the staircase
+int $numSteps = 120; // Number of steps
+float $radius = 1.5; // Radius of the staircase
+float $height = 0.2; // Height of each step
+float $rotationAngle = 18.0; // Angle between each step
+
+// Create a new empty group to parent the staircase
+string $staircaseGroup = `group -em -n "spiralStaircase"`;
+
+// Initialize variables
+int $i;
+float $xPos, $zPos, $yPos, $angle;
+
+// Create the individual steps and arrange them in a spiral
+for ($i = 0; $i < $numSteps; $i++) {
+    $angle = $i * $rotationAngle;
+    $xPos = $radius * cos(deg_to_rad($angle));
+    $zPos = $radius * sin(deg_to_rad($angle));
+    $yPos = $i * $height;
+
+    // Create a cube for each step
+    string $step[] = `polyCube -w 1 -h $height -d 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1`;
+    
+    // Translate and rotate the step to its position in the spiral
+    move $xPos $yPos $zPos $step[0];
+    rotate 0 $angle 0 $step[0];
+
+    // Parent the step to the staircase group
+    parent $step[0] $staircaseGroup;
+}
+
+// Calculate the total height of the staircase
+float $staircaseHeight = $numSteps * $height;
+
+// Center the staircase in the scene
+move 0 ($staircaseHeight / 2.0) 0 $staircaseGroup;
+
+// Select the staircase group to make it easier to manipulate
+select $staircaseGroup;
+
+//Used this to help debug the staircase as I had issues with just a couple stairs coming out.
+// Print a message to confirm the staircase creation
+print("Spiral staircase created with " + $numSteps + " steps.\n");
