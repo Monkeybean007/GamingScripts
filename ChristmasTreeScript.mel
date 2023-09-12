@@ -29,7 +29,7 @@ proc string createRandomSnowflakes(float $x, float $y, float $z) {
 }
 
 // Specify the number of snowflakes you want
-int $numSnowflakes = 50; // Adjust as needed
+int $numSnowflakes = 100; // Adjust as needed
 
 // Array of section names
 string $sectionNames[] = {"pCone1", "pCone2", "pCone3"};
