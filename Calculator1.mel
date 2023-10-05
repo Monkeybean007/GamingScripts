@@ -1,0 +1,117 @@
+// Sub-function to calculate the sum of an array of float values
+global proc float sum(float $values[]) {
+    float $result = 0.0;
+    for ($value in $values) {
+        $result += $value;
+    }
+    return $result;
+}
+
+// Sub-function to calculate the difference between two or more values
+global proc float difference(float $values[]) {
+    float $result = $values[0];
+    for (int $i = 1; $i < size($values); $i++) {
+        $result -= $values[$i];
+    }
+    return $result;
+}
+
+// Sub-function to calculate the product of two or more values
+global proc float multiply(float $values[]) {
+    float $result = 1.0;
+    for ($value in $values) {
+        $result *= $value;
+    }
+    return $result;
+}
+
+// Sub-function to calculate the division of two or more values
+global proc float divide(float $values[]) {
+    float $result = $values[0];
+    for (int $i = 1; $i < size($values); $i++) {
+        if ($values[$i] != 0) {
+            $result /= $values[$i];
+        } else {
+            error("Division by zero is not allowed.");
+        }
+    }
+    return $result;
+}
+
+// Sub-function to calculate the power of x raised to the n
+global proc float power(float $x, int $n) {
+    float $result = pow($x, $n);
+    return $result;
+}
+
+// Sub-function to calculate the mean (average) of an array of float values
+global proc float mean(float $values[]) {
+    if (size($values) == 0) {
+        error("Cannot calculate mean of an empty array.");
+    }
+    float $total = sum($values);
+    float $result = $total / size($values);
+    return $result;
+}
+
+// Sub-function to calculate the median of an array of float values
+global proc float median(float $values[]) {
+    int $numValues = size($values);
+    if ($numValues == 0) {
+        error("Cannot calculate median of an empty array.");
+    }
+    
+    // Sort the array in ascending order
+    float $sortedValues[] = sort($values);
+    
+    if ($numValues % 2 == 1) {
+        // If the number of values is odd, return the middle value
+        return $sortedValues[($numValues - 1) / 2];
+    } else {
+        // If the number of values is even, return the average of the two middle values
+        int $middleIndex1 = $numValues / 2 - 1;
+        int $middleIndex2 = $numValues / 2;
+        return ($sortedValues[$middleIndex1] + $sortedValues[$middleIndex2]) / 2.0;
+    }
+}
+
+// Calculator function that calls the appropriate sub-function based on the operation parameter
+global proc float calculator(float $input[], int $operation) {
+    float $result = 0.0;
+    string $operationText = "";
+    
+    if ($operation == 1) {
+        $result = sum($input);
+        $operationText = "+";
+    } else if ($operation == 2) {
+        $result = difference($input);
+        $operationText = "-";
+    } else if ($operation == 3) {
+        $result = multiply($input);
+        $operationText = "*";
+    } else if ($operation == 4) {
+        $result = divide($input);
+        $operationText = "/";
+    } else if ($operation == 5) {
+        if (size($input) == 2) {
+            $result = power($input[0], int($input[1]));
+            $operationText = "^";
+        } else {
+            error("Power operation requires exactly 2 input values.");
+        }
+    } else if ($operation == 6) {
+        $result = mean($input);
+        $operationText = "mean";
+    } else if ($operation == 7) {
+        $result = median($input);
+        $operationText = "median";
+    } else {
+        error("Invalid operation specified.");
+    }
+    
+    print("Input values: " + string($input) + "\n");
+    print("Operation: " + $operationText + "\n");
+    print("Result: " + $result + "\n");
+    
+    return $result;
+}
