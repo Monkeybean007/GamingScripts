@@ -116,6 +116,7 @@ global proc float calculator(float $input[], int $operation) {
     print("\n");
     print("Operation: " + $operationText + "\n");
     print("Result: " + $result + "\n");
-    
+   
     return $result;
 }
+

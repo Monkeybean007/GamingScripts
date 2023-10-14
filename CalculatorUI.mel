@@ -1,0 +1,53 @@
+if (`window -exists calculatorWindow`) {
+    deleteUI calculatorWindow;
+}
+
+global string $calculatorInput;
+
+window -title "Calculator" -widthHeight 300 400 calculatorWindow;
+columnLayout -adjustableColumn true;
+
+textField -text "" -editable false -width 280 calculatorDisplay;
+
+rowLayout -nc 4;
+button -label "7" -command "setCalculatorInput(7)";
+button -label "8" -command "setCalculatorInput(8)";
+button -label "9" -command "setCalculatorInput(9)";
+button -label "/" -command "setCalculatorInput('/')";
+setParent..;
+
+rowLayout -nc 4;
+button -label "4" -command "setCalculatorInput(4)";
+button -label "5" -command "setCalculatorInput(5)";
+button -label "6" -command "setCalculatorInput(6)";
+button -label "*" -command "setCalculatorInput('*')";
+setParent..;
+
+rowLayout -nc 4;
+button -label "1" -command "setCalculatorInput(1)";
+button -label "2" -command "setCalculatorInput(2)";
+button -label "3" -command "setCalculatorInput(3)";
+button -label "-" -command "setCalculatorInput('-')";
+setParent..;
+
+rowLayout -nc 4;
+button -label "0" -command "setCalculatorInput(0)";
+button -label "." -command "setCalculatorInput('.')";
+button -label "=" -command "calculateResult()";
+button -label "+" -command "setCalculatorInput('+')";
+setParent..;
+
+showWindow calculatorWindow;
+
+global proc setCalculatorInput(string $value) {
+    global string $calculatorInput;
+    $calculatorInput += $value;
+    textField -edit -text $calculatorInput calculatorDisplay;
+}
+
+global proc calculateResult() {
+    global string $calculatorInput;
+    string $expression = $calculatorInput;
+    string $result = `eval("float " + $expression)`;
+    textField -edit -text $result calculatorDisplay;
+}
