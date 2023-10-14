@@ -1,0 +1,43 @@
+if (`window -exists myToolWindow`) {
+    deleteUI myToolWindow;
+}
+
+window -title "Duplicate and Disperse Tool" myToolWindow;
+columnLayout -adjustableColumn true;
+
+text -label "Number of Duplicates:";
+intFieldGrp -numberOfFields 1 -value1 1 numDuplicatesField;
+
+text -label "X Range (Min/Max):";
+floatFieldGrp -numberOfFields 2 -value1 0.0 -value2 10.0 xRangeField;
+
+text -label "Y Range (Min/Max):";
+floatFieldGrp -numberOfFields 2 -value1 0.0 -value2 10.0 yRangeField;
+
+text -label "Z Range (Min/Max):";
+floatFieldGrp -numberOfFields 2 -value1 0.0 -value2 10.0 zRangeField;
+
+button -label "Duplicate and Disperse" -command "executeDuplicateAndDisperse()";
+
+global proc duplicateAndDisperseObjects(int $numDuplicates, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ) {
+    string $selectedObjects[] = `ls -selection`;
+
+    for ($i = 0; $i < $numDuplicates; $i++) {
+        string $duplicatedObjects[] = `duplicate $selectedObjects`;
+        float $randX = rand($minX, $maxX);
+        float $randY = rand($minY, $maxY);
+        float $randZ = rand($minZ, $maxZ);
+        move $randX $randY $randZ $duplicatedObjects;
+    }
+}
+
+global proc executeDuplicateAndDisperse() {
+    int $numDuplicates = `intFieldGrp -q -value1 numDuplicatesField`;
+    float $xRange[] = `floatFieldGrp -q -value xRangeField`;
+    float $yRange[] = `floatFieldGrp -q -value yRangeField`;
+    float $zRange[] = `floatFieldGrp -q -value zRangeField`;
+    
+    duplicateAndDisperseObjects($numDuplicates, $xRange[0], $xRange[1], $yRange[0], $yRange[1], $zRange[0], $zRange[1]);
+}
+
+showWindow myToolWindow;
